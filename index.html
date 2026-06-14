@@ -13,42 +13,64 @@
     <br>
     <button onclick="sendData()" style="padding: 10px 20px;">Отправить отчет</button>
 
-  <script>
-    // Инициализация календаря
-    flatpickr("#datePicker", { mode: "range", dateFormat: "Y-m-d" });
+ <!DOCTYPE html>
 
-    function sendData() {
-        const range = document.querySelector("#datePicker").value.split(" to ");
-        if (range.length < 2) return alert("Выберите даты!");
-        
-        // Форматируем строку как "YYYY-MM-DD_YYYY-MM-DD" (как ждет наша нода JavaScript2 в n8n)
-        const periodString = `${range[0]}_${range[1]}`;
+<html>
 
-        // Достаем chat_id из параметров ссылки (мы его туда передадим в n8n)
-        const urlParams = new URLSearchParams(window.location.search);
-        const chatId = urlParams.get('chat_id');
+<head>
 
-        // Отправляем данные напрямую в n8n через интернет, минуя блокировку Telegram
-        // ЗАМЕНИТЕ URL НИЖЕ НА ВАШ WEBHOOK ИЗ N8N (Используйте Test или Production URL)
-        fetch('https://ВАШ_ДОМЕН_N8N.hooks.n8n.cloud/тут_ваш_путь_webhook', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                chat_id: chatId,
-                period: periodString
-            })
-        })
-        .then(() => {
-            // Закрываем календарь только после успешной отправки
+    <title>Выбор периода</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+    <style>body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }</style>
+
+</head>
+
+<body>
+
+    <h3>Выберите период отчета</h3>
+
+    <input type="text" id="datePicker" placeholder="Нажмите для выбора дат" style="padding: 10px; width: 80%;">
+
+    <br>
+
+    <button onclick="sendData()" style="padding: 10px 20px;">Отправить отчет</button>
+
+
+
+    <script>
+
+        flatpickr("#datePicker", { mode: "range", dateFormat: "Y-m-d" });
+
+
+
+        function sendData() {
+
+            const range = document.querySelector("#datePicker").value.split(" to ");
+
+            if (range.length < 2) return alert("Выберите даты!");
+
+            
+
+            const data = { period: "custom", date_from: range[0], date_to: range[1] };
+
+            // Отправляем данные в n8n через Telegram WebApp
+
+            window.Telegram.WebApp.sendData(JSON.stringify(data));
+
             window.Telegram.WebApp.close();
-        })
-        .catch((err) => {
-            alert("Ошибка отправки: " + err);
-            window.Telegram.WebApp.close();
-        });
-    }
-</script>
+
+        }
+
+    </script>
+
+</body>
+
+</html>
 </body>
 </html>
