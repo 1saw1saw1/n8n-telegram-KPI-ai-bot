@@ -1,0 +1,654 @@
+
+{
+  "name": "My workflow 4",
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "bc596995-2a95-49f0-8e21-c6ab99b8a41f",
+                    "leftValue": "={{ $json.message?.text ?? $json.message?.web_app_data?.data }}",
+                    "rightValue": "=Today",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "78b4ae74-2c70-4eb6-8fc4-6d687583c48b",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "Week",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "d1aee334-6caf-4cd4-949f-382dcd91513b",
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "Month",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e615fe8e-5b81-47a9-9039-72b22173035e",
+                    "leftValue": "={{ $json.message.web_app_data.data }}",
+                    "rightValue": "{{ ... }}",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notEmpty",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        48,
+        48
+      ],
+      "id": "a9dc9b39-c56c-4445-9140-15c20b9fe194",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "aYzLMFyMGh79kI7m",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/aYzLMFyMGh79kI7m",
+          "cachedResultName": "My workflow 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "period": "={{ $json.message.text }}"
+          },
+          "matchingColumns": [
+            "period"
+          ],
+          "schema": [
+            {
+              "id": "period",
+              "displayName": "period",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        -64
+      ],
+      "id": "f047da99-2cea-481b-bcad-fb10606cee2b",
+      "name": "Call 'My workflow 4'1"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "aYzLMFyMGh79kI7m",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/aYzLMFyMGh79kI7m",
+          "cachedResultName": "My workflow 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "period": "={{ $json.callback_query.data }}"
+          },
+          "matchingColumns": [
+            "period"
+          ],
+          "schema": [
+            {
+              "id": "period",
+              "displayName": "period",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        176
+      ],
+      "id": "308d8ef9-bfd1-438b-866b-2c78b6c223a6",
+      "name": "Call 'My workflow 4'2"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "aYzLMFyMGh79kI7m",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/aYzLMFyMGh79kI7m",
+          "cachedResultName": "My workflow 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "period": "={{ $json.message.web_app_data.data }}"
+          },
+          "matchingColumns": [
+            "period"
+          ],
+          "schema": [
+            {
+              "id": "period",
+              "displayName": "period",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        320
+      ],
+      "id": "d3fe41e4-2309-43ca-a255-99a7e47a27c7",
+      "name": "Call 'My workflow 4'3"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message?.chat?.id ?? $('Telegram Trigger1').item.json.callback_query?.message?.chat?.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        592,
+        -192
+      ],
+      "id": "c1ac3632-dbf3-41b2-86d0-85390f839135",
+      "name": "Send a text message1",
+      "webhookId": "55aa223a-2684-423e-a2a2-dbc5b234554c",
+      "credentials": {
+        "telegramApi": {
+          "id": "cZ3ifXJsAjQzTrom",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message?.chat?.id ?? $('Telegram Trigger1').item.json.callback_query?.message?.chat?.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        -64
+      ],
+      "id": "032e5b11-9d0f-4289-b7a0-ea744b3974c8",
+      "name": "Send a text message2",
+      "webhookId": "55aa223a-2684-423e-a2a2-dbc5b234554c",
+      "credentials": {
+        "telegramApi": {
+          "id": "lL6xRUuf60gFS9Dq",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message?.chat?.id ?? $('Telegram Trigger1').item.json.callback_query?.message?.chat?.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        752,
+        176
+      ],
+      "id": "249984c4-4608-4bdb-b2a8-378411b683b2",
+      "name": "Send a text message3",
+      "webhookId": "55aa223a-2684-423e-a2a2-dbc5b234554c",
+      "credentials": {
+        "telegramApi": {
+          "id": "lL6xRUuf60gFS9Dq",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger1').item.json.message?.chat?.id ?? $('Telegram Trigger1').item.json.callback_query?.message?.chat?.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        624,
+        320
+      ],
+      "id": "ae49922a-6997-4151-baa8-424e71b063c1",
+      "name": "Send a text message4",
+      "webhookId": "55aa223a-2684-423e-a2a2-dbc5b234554c",
+      "credentials": {
+        "telegramApi": {
+          "id": "lL6xRUuf60gFS9Dq",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "61671b6a-35bf-46d1-be06-b9a062e2c11b",
+              "leftValue": "={{ $json.callback_query.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "05e492b5-1682-4f34-9559-17024f18d09c",
+              "leftValue": "={{ $json.message?.web_app_data?.data }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "83d50d12-fa89-4ba7-815a-ad980867f0cb",
+              "leftValue": "={{ $json.message?.text }}",
+              "rightValue": "=^(Today|Week|Month)$",
+              "operator": {
+                "type": "string",
+                "operation": "regex"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -352,
+        80
+      ],
+      "id": "4a31b000-6558-4c5e-a40c-67134c13c00a",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "aYzLMFyMGh79kI7m",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/aYzLMFyMGh79kI7m",
+          "cachedResultName": "My workflow 3"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "period": "={{ $json.message.text }}"
+          },
+          "matchingColumns": [
+            "period"
+          ],
+          "schema": [
+            {
+              "id": "period",
+              "displayName": "period",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "mode": "each",
+        "options": {
+          "waitForSubWorkflow": true
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.3,
+      "position": [
+        272,
+        -192
+      ],
+      "id": "ce3e3832-98c1-4c99-8618-2c7ad1f193db",
+      "name": "Call 'My workflow 4.4'"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message",
+          "callback_query"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -640,
+        96
+      ],
+      "id": "32ff2ef8-3819-4e3b-b6cc-6de2e5af2bbd",
+      "name": "Telegram Trigger1",
+      "webhookId": "2eb9ed11-3738-40cf-be28-153819532f70",
+      "credentials": {
+        "telegramApi": {
+          "id": "lL6xRUuf60gFS9Dq",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.chat.id }}",
+        "text": "Нажмите кнопку «Открыть календарь» внизу экрана, чтобы выбрать даты:",
+        "replyMarkup": "replyKeyboard",
+        "replyKeyboard": {
+          "rows": [
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Custom data",
+                    "additionalFields": {
+                      "web_app": {
+                        "url": "https://1saw1saw1.github.io/twa-calendar/"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "row": {
+                "buttons": [
+                  {
+                    "text": "Today",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Week",
+                    "additionalFields": {}
+                  },
+                  {
+                    "text": "Month",
+                    "additionalFields": {}
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "replyKeyboardOptions": {
+          "resize_keyboard": true,
+          "one_time_keyboard": true
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -160,
+        272
+      ],
+      "id": "c3bb45be-1b71-4199-b6a6-4df4e4244b78",
+      "name": "Send a text message6",
+      "webhookId": "0cbb707b-21f0-4d18-8b86-bc1e1acf0e41",
+      "credentials": {
+        "telegramApi": {
+          "id": "cZ3ifXJsAjQzTrom",
+          "name": "Telegram account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Call 'My workflow 4.4'",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'My workflow 4'1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'My workflow 4'2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Call 'My workflow 4'3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'My workflow 4'1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'My workflow 4'2": {
+      "main": [
+        [
+          {
+            "node": "Send a text message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'My workflow 4'3": {
+      "main": [
+        [
+          {
+            "node": "Send a text message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send a text message6",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'My workflow 4.4'": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger1": {
+      "main": [
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a text message6": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "b960f270-55cd-469b-a87a-4a4ca6503ca7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "27fbeedbd52dc428134f87a6297814f7712701cd5b531a9568ae29dfdb85f248"
+  },
+  "nodeGroups": [],
+  "id": "3pdoGtptAfYoqMKv",
+  "tags": []
+}
