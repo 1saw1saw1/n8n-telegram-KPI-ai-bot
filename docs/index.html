@@ -66,10 +66,19 @@
             tg.expand();
         }
 
+        let dateFrom = null;
+        let dateTo = null;
+
         const picker = flatpickr("#datePicker", {
             mode: "range",
             dateFormat: "Y-m-d",
-            locale: "ru"
+            locale: "ru",
+            onChange: function(selectedDates) {
+                if (selectedDates.length >= 2) {
+                    dateFrom = fmt(selectedDates[0]);
+                    dateTo = fmt(selectedDates[1]);
+                }
+            }
         });
 
         document.getElementById("sendBtn").addEventListener("click", sendData);
@@ -81,9 +90,35 @@
             return y + "-" + m + "-" + d;
         }
 
+        function getDateRange() {
+            if (dateFrom && dateTo) {
+                return { date_from: dateFrom, date_to: dateTo };
+            }
+
+            const selected = picker.selectedDates;
+            if (selected.length >= 2) {
+                return {
+                    date_from: fmt(selected[0]),
+                    date_to: fmt(selected[1])
+                };
+            }
+
+            const matches = document.getElementById("datePicker").value.match(/\d{4}-\d{2}-\d{2}/g);
+            if (matches && matches.length >= 2) {
+                return {
+                    date_from: matches[0],
+                    date_to: matches[1]
+                };
+            }
+
+            return null;
+        }
+
         function sendData() {
-            const dates = picker.selectedDates;
-            if (dates.length < 2) {
+            picker.close();
+
+            const range = getDateRange();
+            if (!range) {
                 const message = "Выберите две даты — начало и конец периода.";
                 if (tg?.showAlert) {
                     tg.showAlert(message);
@@ -95,8 +130,8 @@
 
             const data = {
                 period: "custom",
-                date_from: fmt(dates[0]),
-                date_to: fmt(dates[1])
+                date_from: range.date_from,
+                date_to: range.date_to
             };
 
             const payload = JSON.stringify(data);
