@@ -66,7 +66,7 @@
             tg.expand();
         }
 
-        flatpickr("#datePicker", {
+        const picker = flatpickr("#datePicker", {
             mode: "range",
             dateFormat: "Y-m-d",
             locale: "ru"
@@ -74,9 +74,16 @@
 
         document.getElementById("sendBtn").addEventListener("click", sendData);
 
+        function fmt(date) {
+            const y = date.getFullYear();
+            const m = String(date.getMonth() + 1).padStart(2, "0");
+            const d = String(date.getDate()).padStart(2, "0");
+            return y + "-" + m + "-" + d;
+        }
+
         function sendData() {
-            const range = document.querySelector("#datePicker").value.split(" to ");
-            if (range.length < 2 || !range[0] || !range[1]) {
+            const dates = picker.selectedDates;
+            if (dates.length < 2) {
                 const message = "Выберите две даты — начало и конец периода.";
                 if (tg?.showAlert) {
                     tg.showAlert(message);
@@ -88,8 +95,8 @@
 
             const data = {
                 period: "custom",
-                date_from: range[0],
-                date_to: range[1]
+                date_from: fmt(dates[0]),
+                date_to: fmt(dates[1])
             };
 
             const payload = JSON.stringify(data);
